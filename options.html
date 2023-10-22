@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="FocusFlow16.png" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Russo+One&display=swap">
+    <link href='https://fonts.googleapis.com/css?family=Akatab' rel='stylesheet'>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sites</title>
+    <style>
+        body {
+            font-family: 'Akatab';
+            margin: 20px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        label {
+            font-size: 1.3em;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+            display: flex;
+        }
+
+        input, button {
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: 'Akatab';
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #777;
+            text-align: center;
+        }
+
+        li .cross-btn {
+            background-color: #2e2b2b;
+            color: white;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 0.8em;
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 23px;
+            height: 23px;
+            flex-shrink: 0;
+        }
+
+        .header-banner {
+            max-width: 100%;
+            max-height: 20%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .site-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .site-container button {
+            flex: 1;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .settings-row label {
+            width: 300px;
+            margin-right: 100px;
+        }
+
+        .notification-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .notification-item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cross-btn:before {
+            content: 'X';
+            font-weight: bold;
+        }
+
+        li span.site-name {
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: calc(100% - 35px);
+        }
+
+        #notification-section {
+            background-color: #f7f8f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        #unproductiveInput, #productiveInput {
+            width: 60%;
+            font-family: 'Akatab';
+        }
+
+        #productiveList, #unproductiveList {
+            font-size: 1.2em;
+        }
+
+        #saveRewardSettings {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-banner" style="margin: 0 auto;">
+        <img src="FocusFlowBanner.png" alt="FocusFlow" style="width: 100%;" />
+    </div>
+    <h2>Customize Timer Rewards:</h2>
+    <div class="settings-row">
+        <label for="productiveMinutesInput">Reward after every (productive minutes):</label>
+        <input type="number" id="productiveMinutesInput" step="1" min="1" pattern="\d+" value="10">
+    </div>
+    <div class="settings-row">
+        <label for="unproductiveRewardInput">Reward (unproductive minutes):</label>
+        <input type="number" id="unproductiveRewardInput" step="1" min="1" pattern="\d+" value="1">
+        <button id="saveRewardSettings">Save Settings</button>
+    </div>
+
+    <br>
+    <br>
+
+    <h2>Unproductive Sites:</h2>
+    <ul id="unproductiveList"></ul>
+    <div class="site-container">
+        <input type="text" id="unproductiveInput" placeholder="Enter unproductive site">
+        <button id="addUnproductive">Add</button>
+    </div>
+
+    <h2>Productive Sites:</h2>
+    <ul id="productiveList"></ul>
+    <div class="site-container">
+        <input type="text" id="productiveInput" placeholder="Enter productive site">
+        <button id="addProductive">Add</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h2>Custom Notifications</h2>
+
+    <div id="notification-section">
+
+        <div class="category-section" data-category="productive">
+            <h3>Productive Notifications</h3>
+            <div class="notifications-list" id="productive-notifications-list">
+                <!-- Custom notifications for productive will be added here dynamically -->
+            </div>
+        </div>
+        <button id="addProductiveNotification">Add Productive Notification</button>
+        <br>
+
+        <div class="category-section" data-category="unproductive">
+            <h3>Unproductive Notifications</h3>
+            <div class="notifications-list" id="unproductive-notifications-list">
+                <!-- Custom notifications for unproductive will be added here dynamically -->
+            </div>
+        </div>
+
+        <button id="addUnproductiveNotification">Add Unproductive Notification</button>
+        <br>
+
+        <button id="saveNotifications">Save Notifications</button>
+    </div>
+
+    <footer>
+        &copy; FocusFlow
+    </footer>
+
+    <script src="options.js"></script>
+
+</body>
+</html>

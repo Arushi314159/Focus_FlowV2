@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "version 2 FocusFlow - Productivity Maximiser",
+  "version": "2.0",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "scripting",
+    "notifications",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "FocusFlow16.png",
+      "48": "FocusFlow48.png",
+      "128": "FocusFlow128.png"
+    }
+  },
+  "options_page": "options.html"
+}
